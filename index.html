@@ -42,12 +42,14 @@
 
 <section id="contact" class="slide-up">
     <h2>Contact Me</h2>
-   <form id="contactForm">
-  <input type="text" id="name" placeholder="Your name" required>
-  <input type="email" id="email" placeholder="Your email" required>
+   <form id="contactForm" autocomplete="off">
+  <input type="text" id="name" placeholder="Your name" required autocomplete="off">
+  <input type="email" id="email" placeholder="Your email" required autocomplete="off">
   <textarea id="message" placeholder="Your message" required></textarea>
   <button type="submit">Send</button>
 </form>
+
+<p id="status"></p>
 
 <p id="status"></p>
 

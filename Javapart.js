@@ -1,35 +1,26 @@
- document.addEventListener("DOMContentLoaded", () => {
+document.getElementById("contactForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
 
-    // =========================
-    // CONTACT FORM
-    // =========================
-    const form = document.getElementById("contactForm");
-    const status = document.getElementById("status");
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
 
-    if (form) {
-        form.addEventListener("submit", async function (e) {
-            e.preventDefault();
-
-            const data = {
-                name: document.getElementById("name").value,
-                email: document.getElementById("email").value,
-                message: document.getElementById("message").value
-            };
-
-            try {
-                const res = await fetch("https://portfolio-backend.onrender.com/contact", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify(data)
-                });
-
-                const result = await res.json();
-                status.innerText = result.message;
-                form.reset();
-            } catch (err) {
-                status.innerText = "Server error!";
-            }
-        });
+    if (!name || !email || !message) {
+        document.getElementById("status").innerText = "All fields are required!";
+        return;
     }
 
+    const data = { name, email, message };
+    console.log("Sending:", data);
 
+    const res = await fetch("https://portfolio-backend-xc96.onrender.com/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+    document.getElementById("status").innerText = result.message;
+
+    this.reset();
+});
